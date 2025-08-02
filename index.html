@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google" content="notranslate" />
+        <title>Windows 任务栏窗口管理</title>
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: inherit;
+            }
+
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f6f8;
+                color: #333;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                background-color: #0078d4;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                margin-bottom: 20px;
+            }
+
+            button:hover {
+                background-color: #005fa3;
+            }
+
+            ul#window-list {
+                list-style: none;
+                width: 100%;
+                max-width: 600px;
+            }
+
+            ul#window-list li {
+                background-color: white;
+                padding: 12px 16px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+            }
+
+            ul#window-list li:hover {
+                background-color: #e6f0ff;
+            }
+        </style>
+    </head>
+    <body>
+        <button type="button" onclick="getWindows()">获取任务栏窗口</button>
+        <ul id="window-list"></ul>
+    </body>
+    <script src="webui.js"></script>
+    <script>
+        function getWindows() {
+            get_windows().then((response) => {
+                const ulEle = document.getElementById("window-list");
+                ulEle.innerHTML = "";
+
+                const data = JSON.parse(response);
+                data.windows.forEach((window) => {
+                    const li = document.createElement("li");
+                    li.textContent = window.title;
+                    li.onclick = () => {
+                        activateWindow(window.handle);
+                    };
+                    ulEle.appendChild(li);
+                });
+            });
+        }
+
+        function activateWindow(handle) {
+            activate_window(handle);
+        }
+    </script>
+</html>
