@@ -192,7 +192,6 @@ void get_windows(webui::window::event *e) {
 void activate_window(webui::window::event *e) {
   std::string handle = e->get_string();
   HWND hwnd = HexStringToHwnd(handle);
-  AllowSetForegroundWindow(ASFW_ANY);
   if (IsIconic(hwnd)) {
     ShowWindow(hwnd, SW_RESTORE);
   }
