@@ -2,3 +2,8 @@
 out/
 webui-lib/
 compile_commands.json
+cmake-build-*/
+.idea/
+build/
+*.zip
+_CPack_Packages/

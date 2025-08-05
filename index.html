@@ -91,5 +91,28 @@
         function activateWindow(handle) {
             activate_window(handle);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM is loaded. Check if `webui` object is available
+            if (typeof webui !== 'undefined') {
+                // Set events callback
+                webui.setEventCallback((e) => {
+                    if (e == webui.event.CONNECTED) {
+                        // Connection to the backend is established
+                        console.log('Connected.');
+                        getWindows();
+                        log().then((response) => {
+                            console.log(response);
+                        })
+                    } else if (e == webui.event.DISCONNECTED) {
+                        // Connection to the backend is lost
+                        console.log('Disconnected.');
+                    }
+                });
+            } else {
+                // The virtual file `webui.js` is not included
+                alert('Please add webui.js to your HTML.');
+            }
+        });
     </script>
 </html>
