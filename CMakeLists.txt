@@ -18,11 +18,17 @@ set_target_properties(taskbar-manager PROPERTIES
 add_custom_command(TARGET taskbar-manager POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
         ${CMAKE_SOURCE_DIR}/index.html $<TARGET_FILE_DIR:taskbar-manager>/index.html)
+add_custom_command(TARGET taskbar-manager POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/icon.ico $<TARGET_FILE_DIR:taskbar-manager>/icon.ico)
 
 install(TARGETS taskbar-manager
         RUNTIME DESTINATION .)
 
 install(FILES ${CMAKE_SOURCE_DIR}/index.html
+        DESTINATION .)
+
+install(FILES ${CMAKE_SOURCE_DIR}/icon.ico
         DESTINATION .)
 
 set(CPACK_GENERATOR "ZIP")

@@ -268,7 +268,10 @@ void InitTrayIcon(HINSTANCE hInst) {
     nid.uID = 1;
     nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
     nid.uCallbackMessage = WM_USER + 1;
-    nid.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    nid.hIcon = (HICON) LoadImage(nullptr, "icon.ico", IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
+    if (nid.hWnd == nullptr) {
+        nid.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+    }
     lstrcpy(nid.szTip, "TaskbarManager");
     Shell_NotifyIcon(NIM_ADD, &nid);
 }
