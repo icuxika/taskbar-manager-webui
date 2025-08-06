@@ -1,6 +1,6 @@
 .cache/
 out/
-webui-lib/
+third-party/webui
 compile_commands.json
 cmake-build-*/
 .idea/

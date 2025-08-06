@@ -1,11 +1,12 @@
 #include "webui.hpp"
 #include <cstddef>
 #include <iostream>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 #include <string>
 #include <thread>
 #include <vector>
 #include <windows.h>
+#include "TrayIcon.h"
 
 // 窗口信息结构体
 struct WindowInfo {
