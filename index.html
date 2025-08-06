@@ -79,7 +79,7 @@
                 const data = JSON.parse(response);
                 data.windows.forEach((window) => {
                     const li = document.createElement("li");
-                    li.textContent = window.title;
+                    li.textContent = window.title.substring(0, 64);
                     li.onclick = () => {
                         activateWindow(window.handle);
                     };

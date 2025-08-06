@@ -2,11 +2,8 @@
 #define TRAYICON_H
 
 
-
 class TrayIcon {
-
 };
-
 
 
 #endif //TRAYICON_H

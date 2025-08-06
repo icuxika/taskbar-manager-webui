@@ -22,9 +22,9 @@ struct WindowInfo {
 
 // 获取进程名称
 std::wstring GetProcessName(DWORD processId) {
-    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-                                  FALSE, processId);
-    if (hProcess == NULL) {
+    const HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+                                        FALSE, processId);
+    if (hProcess == nullptr) {
         return L"Unknown";
     }
 
@@ -62,7 +62,7 @@ bool ShouldShowInTaskbar(HWND hwnd) {
 
     // 检查是否有父窗口（排除子窗口）
     HWND parent = GetParent(hwnd);
-    if (parent != NULL && parent != GetDesktopWindow()) {
+    if (parent != nullptr && parent != GetDesktopWindow()) {
         return false;
     }
 
@@ -176,8 +176,8 @@ void get_windows(webui::window::event *e) {
         json windowJson;
 
         // 将宽字符串转换为UTF-8字符串
-        int size_needed = WideCharToMultiByte(CP_UTF8, 0, info.title.c_str(), -1,
-                                              nullptr, 0, nullptr, nullptr);
+        const int size_needed = WideCharToMultiByte(CP_UTF8, 0, info.title.c_str(), -1,
+                                                    nullptr, 0, nullptr, nullptr);
         if (size_needed > 0) {
             std::string titleUtf8(size_needed - 1, 0);
             WideCharToMultiByte(CP_UTF8, 0, info.title.c_str(), -1, &titleUtf8[0],
@@ -218,7 +218,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
         } else if (lParam == WM_RBUTTONUP) {
             HMENU hMenu = CreatePopupMenu();
             AppendMenuW(hMenu, MF_STRING, 1, L"显示窗口");
-            AppendMenuW(hMenu, MF_SEPARATOR, 0, NULL);
+            AppendMenuW(hMenu, MF_SEPARATOR, 0, nullptr);
             AppendMenuW(hMenu, MF_STRING, 2, TEXT(L"退出"));
 
             POINT pt;
